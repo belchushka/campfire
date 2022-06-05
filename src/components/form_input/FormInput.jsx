@@ -5,7 +5,7 @@ const FormInput = ({title=null, placeholder=null, style, value,onChangeText}) =>
   return (
     <View style={[styles.inputContainer,style]}>
       {title && <Text style={styles.inputTitle}>{title}</Text>}
-      <TextInput value={value} onChangeText={(val)=>onChangeText(val)} style={styles.input} placeholder={placeholder} placeholderTextColor={"#c2c2c2"} selectionColor={'#EB6D2E'}/>
+      <TextInput autoCapitalize={"none"} value={value} onChangeText={(val)=>onChangeText(val)} style={styles.input} placeholder={placeholder} placeholderTextColor={"#c2c2c2"} selectionColor={'#EB6D2E'}/>
     </View>
   );
 };

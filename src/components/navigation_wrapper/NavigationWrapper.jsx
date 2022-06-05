@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {NavigationContainer} from '@react-navigation/native';
+import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { Easing, StatusBar, Text, View } from "react-native";
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {useDispatch, useSelector} from 'react-redux';
@@ -12,6 +12,10 @@ import ProfileIcon from '../../assets/icons/Profile';
 import ChatIcon from '../../assets/icons/Chat';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Profile from "../../screens/Profile";
+import { setTokenAndUser } from "../../store/actions/userActions";
+import LoadingScreen from "../../screens/LoadingScreen";
+import Schedule from "../../screens/Schedule"
+import Chats from "../../screens/Chats";
 
 const config = {
   animation: 'timing',
@@ -28,7 +32,7 @@ const Tab = createBottomTabNavigator()
 const Tabs = ()=>{
   return (
     <Tab.Navigator
-      initialRouteName={"Transaction"}
+      initialRouteName={"Profile"}
       screenOptions={{
         headerShown:false,
         tabBarShowLabel:false,
@@ -47,7 +51,7 @@ const Tabs = ()=>{
     >
       <Tab.Screen
         name={"Schedule"}
-        component={Transaction}
+        component={Schedule}
         icon
         options={{
           tabBarIcon:({focused})=>{
@@ -62,7 +66,7 @@ const Tabs = ()=>{
 
       <Tab.Screen
         name={"Messages"}
-        component={Transaction}
+        component={Chats}
         icon
         options={{
           tabBarIcon:({focused})=>{
@@ -108,16 +112,10 @@ const Tabs = ()=>{
 
 
 const NavigationWrapper = () => {
-  const dispatch = useDispatch();
-  const checkData = () => {};
-  useEffect(() => {
-    checkData();
-  }, [checkData]);
-
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName={"Login"}
+        initialRouteName={"Loading"}
         screenOptions={{
 
           transitionSpec: {
@@ -126,6 +124,7 @@ const NavigationWrapper = () => {
           },
           headerShown:false
         }}>
+        <Stack.Screen name={'Loading'}  component={LoadingScreen} />
         <Stack.Screen name={'Login'}  component={Login} />
         <Stack.Screen name={'Tabs'} component={Tabs}/>
       </Stack.Navigator>

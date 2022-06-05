@@ -16,7 +16,7 @@ import { useDispatch } from "react-redux";
 import { authUser } from "../store/actions/userActions";
 import { useAlert } from "../hooks/useAlert";
 
-const Login = () => {
+const Login = ({navigation}) => {
   const alert = useAlert()
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
@@ -27,18 +27,19 @@ const Login = () => {
         email:login,
         password:password
       }))
+      navigation.navigate("Tabs")
     }catch (e) {
-      alert.alert()
+      alert.alert("Неверный логин или пароль")
     }
 
   };
   return (
     <ContentView>
-      <StatusBar
-        translucent={true}
-        backgroundColor={'transparent'}
-        barStyle="light-content"
-      />
+      {/*<StatusBar*/}
+      {/*  translucent={true}*/}
+      {/*  backgroundColor={'transparent'}*/}
+      {/*  barStyle="light-content"*/}
+      {/*/>*/}
 
       <ImageBackground
         source={LoginBg}

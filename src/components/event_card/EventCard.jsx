@@ -1,16 +1,24 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
-import Bell from "../../assets/icons/Bell";
+import {
+  Image,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 
-const EventCard = ({title, text, downloadable = false, downloadableText="", style}) => {
+const EventCard = ({title, text, downloadable = false, downloadableText="", style, icon, alignment="space-between"}) => {
   return (
-    <View style={[styles.container, style]}>
-      <Bell/>
-      <View style={styles.textContainer}>
-        <Text style={styles.title}>{title}</Text>
-        <Text style={styles.text}>{text}</Text>
+    <TouchableOpacity>
+      <View style={[styles.container, style]}>
+        <Image source={icon} />
+        <View style={[styles.textContainer, {justifyContent:alignment}]}>
+          <Text style={styles.title}>{title}</Text>
+          <Text style={styles.text}>{text}</Text>
+        </View>
       </View>
-    </View>
+    </TouchableOpacity>
+
   );
 };
 
@@ -18,12 +26,12 @@ const styles = StyleSheet.create({
   container:{
     flexDirection:"row",
     width:"100%",
+    paddingLeft:4
 
   },
   textContainer:{
-    marginLeft:20,
+    marginLeft:15,
     alignSelf:"stretch",
-    justifyContent:"space-between"
   },
   title:{
     color:"black",
@@ -33,7 +41,8 @@ const styles = StyleSheet.create({
   text:{
     color:"#ADADAD",
     fontFamily:"gilroyreg",
-    fontSize:16
+    fontSize:16,
+    marginTop:10
   }
 })
 

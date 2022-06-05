@@ -1,10 +1,10 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 
-const ProfileTab = ({text, orange=false, style}) => {
+const ProfileTab = ({text, color="white", style, textColor="#EB6D2E", borderColor="#EB6D2E"}) => {
   return (
-    <View style={[styles.body, orange && {backgroundColor:"#EB6D2E"}, style]}>
-      <Text style={[styles.text, orange && {color:"white"}]}>
+    <View style={[styles.body, {backgroundColor:color, borderColor: borderColor}, style]}>
+      <Text style={[styles.text, {color:textColor}]}>
         {text}
       </Text>
     </View>

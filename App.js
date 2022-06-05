@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from "react";
 import {SafeAreaView, StatusBar, View} from 'react-native';
 import {Provider} from 'react-redux';
 import NavigationWrapper from './src/components/navigation_wrapper/NavigationWrapper';

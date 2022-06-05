@@ -1,29 +1,53 @@
 import {useCallback, useState} from 'react';
-import {Modal, StatusBar, StyleSheet, Text, View} from 'react-native';
+import {Dimensions, StatusBar, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+  withSpring,
+} from 'react-native-reanimated';
 
 export const useAlert = () => {
+  const top = useSharedValue(-Dimensions.get('window').height / 2);
+  const dropDownStyle = useAnimatedStyle(() => {
+    return {
+      top: withSpring(top.value, {duration: 600, damping: 15}),
+    };
+  }, []);
+
+  const open = () => {
+    top.value = StatusBar.currentHeight + 10;
+  };
+
+  const close = () => {
+    top.value = -Dimensions.get('window').height;
+  };
+
   const [title, setTitle] = useState('');
   const [text, setText] = useState('');
   const [modalVisible, setModalVisible] = useState(false);
 
-  const alert = () => {
+  const alert = text => {
+    setText(text);
     setModalVisible(true);
+    open();
     setTimeout(() => {
-      setModalVisible(false);
-    }, 2000);
+      close();
+    }, 2500);
   };
 
   const render = useCallback(() => {
     if (modalVisible) {
       return (
-        <View style={styles.alertContainer}>
-          <View style={styles.alertBody}></View>
-        </View>
+        <Animated.View style={[styles.alertContainer, dropDownStyle]}>
+          <View style={styles.alertBody}>
+            <Text style={styles.text}>{text}</Text>
+          </View>
+        </Animated.View>
       );
     }
     return null;
-  }, [modalVisible]);
+  }, [modalVisible, text]);
 
   return {
     alert,
@@ -36,7 +60,6 @@ const styles = StyleSheet.create({
     height: 60,
     width: '100%',
     position: 'absolute',
-    top: StatusBar.currentHeight + 10,
     paddingHorizontal: 20,
   },
 
@@ -45,5 +68,13 @@ const styles = StyleSheet.create({
     minHeight: 70,
     backgroundColor: 'white',
     borderRadius: 8,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+  },
+
+  text: {
+    fontFamily: 'gilroysemib',
+    color: 'black',
+    fontSize: 16,
   },
 });
