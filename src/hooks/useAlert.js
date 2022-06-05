@@ -60,6 +60,7 @@ const styles = StyleSheet.create({
     height: 60,
     width: '100%',
     position: 'absolute',
+    zIndex:1000,
     paddingHorizontal: 20,
   },
 

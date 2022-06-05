@@ -1,9 +1,25 @@
 import React from "react";
-import { Dimensions, StyleSheet, Text, View } from "react-native";
+import { Dimensions, StyleSheet, Text, TouchableHighlight, TouchableOpacity, View } from "react-native";
+import ArrowRight from "../../assets/icons/ArrowRight";
 
-const CustomHeader = ({title}) => {
+const CustomHeader = ({title, navigation, hasBackButton = false}) => {
   return (
     <View style={styles.header}>
+      {
+        hasBackButton &&  <TouchableOpacity onPress={()=>navigation.navigate("Profile")} style={{
+          transform:[
+            {
+              rotate:"180deg"
+            }
+          ],
+          position:"absolute",
+          left:0,
+          padding:20
+        }}>
+          <ArrowRight/>
+        </TouchableOpacity>
+      }
+
       <Text style={styles.headerText}>{title}</Text>
     </View>
   );

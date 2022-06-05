@@ -1,5 +1,5 @@
-import React from 'react';
-import {ScrollView, StyleSheet, Text, TouchableOpacity} from 'react-native';
+import React, { useEffect } from "react";
+import { ScrollView, StatusBar, StyleSheet, Text, TouchableOpacity } from "react-native";
 import ContentView from '../components/content_view/ContentView';
 import ContentContainer from '../components/content_container/ContentContainer';
 import ProfileTab from '../components/profile_tab/ProfileTab';
@@ -10,6 +10,7 @@ import {logoutUser} from '../store/actions/userActions';
 import MoneyIcon from "../assets/icons/Money.png"
 import ColocolIcon from "../assets/icons/Colocol.png"
 import LestnicaIcon from "../assets/icons/Lestnica.png"
+import FeedbackButton from "../components/feedback_button/FeedbackButton";
 
 const Profile = ({navigation}) => {
   const user = useSelector(state => state.user.user);
@@ -20,18 +21,26 @@ const Profile = ({navigation}) => {
     navigation.navigate("Login")
   };
 
+  useEffect(()=>{
+    StatusBar.setTranslucent(false)
+    StatusBar.setBackgroundColor("white")
+  })
+
   return (
     <ContentView style={{backgroundColor: 'white', borderColor: 'red'}}>
-      <ContentContainer>
         <ScrollView showsHorizontalScrollIndicator={false} showsVerticalScrollIndicator={false}>
-          <Text style={styles.name}>
-            {user.firstname} {user.lastname}
-          </Text>
+          <ContentContainer>
+            <Text style={styles.name}>
+              {user.firstname} {user.lastname}
+            </Text>
+          </ContentContainer>
+
           <ScrollView style={{marginTop: 21}} horizontal={true}  showsHorizontalScrollIndicator={false} showsVerticalScrollIndicator={false}>
             <ProfileTab
               text={user.group + ' отряд'}
               textColor={'white'}
               color={'#EB6D2E'}
+              style={{marginLeft:16}}
             />
             <ProfileTab
               style={{marginLeft: 12}}
@@ -47,7 +56,11 @@ const Profile = ({navigation}) => {
               />
             </TouchableOpacity>
           </ScrollView>
-          <Separator color={'#F6F6F6'} margins={27} />
+          <ContentContainer>
+          <FeedbackButton  navigation={navigation} style={{
+            marginVertical:30,
+
+          }}/>
           <Text style={styles.eventTitle}>Сегодня</Text>
           <EventCard
             icon={MoneyIcon}
@@ -106,8 +119,8 @@ const Profile = ({navigation}) => {
             style={{marginTop: 30, marginBottom: 160}}
             text={'20 комната, 20:30'}
           />
+            </ContentContainer>
         </ScrollView>
-      </ContentContainer>
     </ContentView>
   );
 };

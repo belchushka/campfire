@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useEffect, useState } from "react";
 import ContentView from '../components/content_view/ContentView';
 import {
   Dimensions,
@@ -33,14 +33,13 @@ const Login = ({navigation}) => {
     }
 
   };
+
+  useEffect(()=>{
+    StatusBar.setTranslucent(true)
+    StatusBar.setBackgroundColor("transparent")
+  },[])
   return (
     <ContentView>
-      {/*<StatusBar*/}
-      {/*  translucent={true}*/}
-      {/*  backgroundColor={'transparent'}*/}
-      {/*  barStyle="light-content"*/}
-      {/*/>*/}
-
       <ImageBackground
         source={LoginBg}
         resizeMode="cover"

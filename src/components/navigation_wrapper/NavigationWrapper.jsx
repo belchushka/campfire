@@ -16,6 +16,7 @@ import { setTokenAndUser } from "../../store/actions/userActions";
 import LoadingScreen from "../../screens/LoadingScreen";
 import Schedule from "../../screens/Schedule"
 import Chats from "../../screens/Chats";
+import Feedback from "../../screens/Feedback";
 
 const config = {
   animation: 'timing',
@@ -127,6 +128,7 @@ const NavigationWrapper = () => {
         <Stack.Screen name={'Loading'}  component={LoadingScreen} />
         <Stack.Screen name={'Login'}  component={Login} />
         <Stack.Screen name={'Tabs'} component={Tabs}/>
+        <Stack.Screen name={'Feedback'} component={Feedback}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
